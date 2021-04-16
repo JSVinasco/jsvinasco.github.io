@@ -1,3 +1,8 @@
+Hello and welcome to this blog. 
+
+![Image of fast.ai logo](images/Selección_015.png)
+
+## Just a Remote Sensing Blog
 
 ## Just a Remote Sensing Blog
 
