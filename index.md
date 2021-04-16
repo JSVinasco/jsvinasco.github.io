@@ -4,7 +4,6 @@ Hello and welcome to this blog.
 
 ## Just a Remote Sensing Blog
 
-## Just a Remote Sensing Blog
 
 Hey mi name is Juan Sebastián Vinasco Salinas.
 
