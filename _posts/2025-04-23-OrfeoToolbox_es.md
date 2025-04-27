@@ -1,7 +1,4 @@
 
-1.  [Orfeo Toolbox, una biblioteca para procesamiento de imagenes de satelite](#orgbcc99b2)
-
-
 
 <a id="orgbcc99b2"></a>
 
