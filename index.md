@@ -7,7 +7,9 @@ Hello and welcome to this blog.
 
 Hey mi name is Juan Sebastián Vinasco Salinas.
 
-I am a senior student in Topography Engineering at Universidad del Valle in Colombia,
+I am a Topography Engineering at Universidad del Valle in Colombia, 
+and work between October 2020 and August 2024 at CESBIO 
+in several projects closely linked to the French space agency.
 I have knowledge in remote sensing, digital image processing, spatial analysis,
 geographic information systems and their integration with environmental sensors. I am
 interested in working in remote sensing applications on both active and passive satellite
