@@ -1,14 +1,16 @@
+
 <a id="org234cd81"></a>
 
 # Data Science in C? (version 2.0)
 
-Ciencia de datos en C, el titulo parece una broma, pero te aseguro que no lo es. Este titulo es una forma muy sintetica de describir el libro *Modeling with data, Tools and Techniques for Scientific Computing*<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>  escrito por *Ben Klemens*.
+Data Science in C, the title seems like a joke, but I assure you it is not. This title is a very synthetical way to describe the book. *Modeling with data, Tools and Techniques for Scientific Computing*<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>  writen by *Ben Klemens*.
 
-Este es la clase de libros que me gustan, una combinanción de código, matematicas y prosa. Un libro que habla sobre los temas, pero que tambien te muestra como hacerlo, un verdadero libro que siguie la filosofía del programador pragmatico.
+This is the kind of book I like, a combination of code, mathematics and prose. A book that talks about the issues, but also shows you how to do it, a true book that follows the philosophy of the pragmatic programmer.
 
-Es tambien, desde mi perspectiva una valiosa herramienta de aprendizaje, mi formación como *ingeniero topográfico* se encuentra lastimosamente alejada de los temas descritos en el libro, y me ha costado mucho auto-trabajo personal aprender estos temas, y sin la valiosa ayuda de libros como este, y en particular de libros con estilos como este hubiese sido imposible.
+It is also, from my perspective a valuable learning tool, my background as a *survey engineer* is unfortunately far from the topics described in the book, and it has taken me a lot of personal self-work to learn these topics, and without the valuable help of books like this one, and in particular books with styles like this one, it would have been impossible.
 
-Finalmente un descargo de responsabilidad, este blog post, esta inspirado en una entrada del blog personal de mi maestro y mentor Jordi Inglada <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>
+Finally a disclaimer, this blog post, is inspired by a personal blog post of my teacher and mentor Jordi Inglada  <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>
+
 
 
 # Footnotes
