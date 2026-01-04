@@ -72,10 +72,8 @@ def descarga_masiva():
             bands=None,  # Export all 128 bands (default)
             compress="lzw"  # Compression method
         )
-
 if __name__ == "__main__":
     descarga_masiva()
-
 ```
 
 # Footnotes
