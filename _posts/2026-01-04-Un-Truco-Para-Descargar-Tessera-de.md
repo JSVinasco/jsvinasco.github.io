@@ -18,21 +18,21 @@ Als ich mir das Ganze genauer ansah, stellte ich fest, dass der von
 geotessera durchgeführte Verarbeitungsablauf wie folgt aussieht:
 
 ```{=ascii}
-User Request (lat/lon bbox)
+Benutzeranforderung  (lat/lon bbox)
     ↓
-Parquet Registry Lookup (find available tiles from registry.parquet)
+Parquet-Registrierungssuche (verfügbare Kacheln aus registry.parquet suchen)
     ↓
-Direct HTTP Downloads to Temp Files
-    ├── embedding.npy (quantized) → temp file
-    └── embedding_scales.npy → temp file
+Direkte HTTP-Downloads in temporäre Dateien
+    ├── embedding.npy (quantisiert) → temporäre Datei
+    └── embedding_scales.npy → temporäre Datei
     ↓
-Dequantization (multiply arrays)
+Entquantisierung (Arrays multiplizieren)
     ↓
-Automatic Cleanup (delete temp files)
+Automatische Bereinigung (temporäre Dateien löschen)
     ↓
-Output Format
-    ├── NumPy arrays → Direct analysis
-    └── GeoTIFF → GIS integration
+Ausgabeformat
+    ├── NumPy arrays → Direkte Analyse
+    └── GeoTIFF → GIS-Integration
 
 ```
 Insbesondere die Konvertierung in das Geotiff-Format ist hinsichtlich des
@@ -69,8 +69,8 @@ def descarga_masiva():
         gt.export_embedding_geotiffs(
             tiles_to_fetch=[tile],
             output_dir=".",
-            bands=None,  # Export all 128 bands (default)
-            compress="lzw"  # Compression method
+            bands=None,  #  Alle 128 Bänder exportieren (Standard)
+            compress="lzw"  # Komprimierungsmethode
         )
 
 if __name__ == "__main__":
