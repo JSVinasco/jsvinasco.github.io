@@ -18,21 +18,21 @@ En regardant sous le capot, j'ai réalisé que le flux de traitement effectué p
 geotessera est le suivant :
 
 ```{=ascii}
-User Request (lat/lon bbox)
+Demande utilisateur  (lat/lon bbox)
     ↓
-Parquet Registry Lookup (find available tiles from registry.parquet)
+Recherche dans le registre Parquet (recherche des tuiles disponibles dans registry.parquet)
     ↓
-Direct HTTP Downloads to Temp Files
-    ├── embedding.npy (quantized) → temp file
-    └── embedding_scales.npy → temp file
+Téléchargements HTTP directs vers des fichiers temporaires
+    ├── embedding.npy (quantisés) → fichier temporaire
+    └── embedding_scales.npy → fichier temporaire
     ↓
-Dequantization (multiply arrays)
+Déquantification (multiplication des matrices)
     ↓
-Automatic Cleanup (delete temp files)
+Nettoyage automatique (suppression des fichiers temporaires)
     ↓
-Output Format
-    ├── NumPy arrays → Direct analysis
-    └── GeoTIFF → GIS integration
+Format de sortie
+    ├── NumPy arrays → Analyse directe
+    └── GeoTIFF → Intégration SIG
 
 ```
 La conversion au format geotiff, en particulier, pose problème en termes de
@@ -63,14 +63,14 @@ def descarga_masiva():
     tiles_to_fetch = gt.registry.load_blocks_for_region(bounds=bbox, year=2024)
     tiles_to_fetch.reverse()
 
-    for tile in tqdm(tiles_to_fetch,  #_no_duplicated[25:100],
-                     total=len(tiles_to_fetch), #_no_duplicated[25:100]),
+    for tile in tqdm(tiles_to_fetch,
+                     total=len(tiles_to_fetch), 
                      desc="Descargando tiles"):
         gt.export_embedding_geotiffs(
             tiles_to_fetch=[tile],
             output_dir=".",
-            bands=None,  # Export all 128 bands (default)
-            compress="lzw"  # Compression method
+            bands=None,  # Exporter les 128 bandes (par défaut)
+            compress="lzw"  # Méthode de compression
         )
 
 if __name__ == "__main__":
