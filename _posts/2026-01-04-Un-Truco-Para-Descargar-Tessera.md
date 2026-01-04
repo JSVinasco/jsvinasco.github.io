@@ -19,21 +19,21 @@ Revisando bajo el capo, me doy cuenta que el flujo de procesamiento que
 realiza geotessera es el siguiente:
 
 ```{=ascii}
-User Request (lat/lon bbox)
+Solicitud del usuario (caja contenedora lat/lon )
     ↓
-Parquet Registry Lookup (find available tiles from registry.parquet)
+Búsqueda en el registro de parquet (buscar tiles disponibles desde el registro(registry.parquet)
     ↓
-Direct HTTP Downloads to Temp Files
-    ├── embedding.npy (quantized) → temp file
-    └── embedding_scales.npy → temp file
+Descargas HTTP directas a archivos temporales
+    ├── embedding.npy (cuantizado) → archivo temporal
+    └── embedding_scales.npy → archivo temporal
     ↓
-Dequantization (multiply arrays)
+Descuantización (matrices multiplicadas)
     ↓
-Automatic Cleanup (delete temp files)
+Limpieza automática (eliminar archivos temporales)
     ↓
-Output Format
-    ├── NumPy arrays → Direct analysis
-    └── GeoTIFF → GIS integration
+Formato de salida
+    ├── NumPy arrays →  Análisis directo
+    └── GeoTIFF → integración con SIG
 
 ```
 Particularmente la conversión a geotiff, es problematica en cuanto a
