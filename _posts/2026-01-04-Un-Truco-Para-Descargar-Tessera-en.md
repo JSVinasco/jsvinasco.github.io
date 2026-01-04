@@ -63,8 +63,8 @@ def descarga_masiva():
     tiles_to_fetch = gt.registry.load_blocks_for_region(bounds=bbox, year=2024)
     tiles_to_fetch.reverse()
 
-    for tile in tqdm(tiles_to_fetch,  #_no_duplicated[25:100],
-                     total=len(tiles_to_fetch), #_no_duplicated[25:100]),
+    for tile in tqdm(tiles_to_fetch, 
+                     total=len(tiles_to_fetch),
                      desc="Descargando tiles"):
         gt.export_embedding_geotiffs(
             tiles_to_fetch=[tile],
