@@ -253,19 +253,6 @@ In the next post, I’ll show how to extend this idea to perform
 inference with neural networks on satellite images at a large
 scale.
 
-Y con esto cerramos la idea principal:
-
--   los generadores nos permiten trabajar con datos grandes sin cargar
-    todo en memoria
--   el procesamiento por ventanas hace posible trabajar con imágenes
-    satelitales enormes
--   y la paralelización permite acelerar estos procesos sin perder
-    control sobre los datos
-
-En la siguiente entrada voy a mostrar cómo extender esta idea para hacer
-inferencia con redes neuronales sobre imágenes satelitales a gran
-escala.
-
 
 ---
 
