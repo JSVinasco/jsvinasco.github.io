@@ -1,5 +1,3 @@
-# Footnotes
-
 # Generadores y Teledetección
 
 En los últimos días, en mi *feed*, han aparecido varias referencias a
@@ -124,6 +122,11 @@ los procesamos uno a uno.
 
 Esto nos permite trabajar con imágenes mucho más grandes que la memoria
 disponible.
+
+Y obteniendo un resultado como el que vemos en la siguiente imagen:
+
+![This is me ...](images/example_windows_read_raster_file.png)
+
 
 ---
 
