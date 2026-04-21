@@ -142,47 +142,87 @@ La idea es simple:
 -   escribimos el resultado de forma segura en disco
 
 ``` python
+
 import concurrent.futures
+import multiprocessing
 import threading
+from contextlib import nullcontext
+
 import rasterio
 import numpy as np
+from rasterio.env import GDALVersion
 
 
-def process_window(src1, src2, dst, window, read_lock, write_lock):
 
-    with read_lock:
-        a = src1.read(window=window)
-        b = src2.read(window=window)
+def main(infile_1, infile_2, outfile, num_workers=4):
+    """Process infile block-by-block and write to a new file
 
-    result = (b - a) / (b + a + 1e-10)
+    The output is the same as the input, but with band order
+    reversed.
+    """
+    gdal_at_least_3_11 = GDALVersion.runtime().at_least("3.11")
+    with rasterio.open(
+        infile_1,
+        driver="LIBERTIFF" if gdal_at_least_3_11 else None,
+        thread_safe=gdal_at_least_3_11,
+    ) as src_1:
+        with rasterio.open(
+            infile_2,
+            driver="LIBERTIFF" if gdal_at_least_3_11 else None,
+            thread_safe=gdal_at_least_3_11,
+        ) as src_2:
+            # Create a destination dataset based on source params. The
+            # destination will be tiled, and we'll process the tiles
+            # concurrently.
+            profile = src_1.profile
+            profile.update(blockxsize=1024,
+                           blockysize=1024,
+                           tiled=True,
+                           driver="GTiff")
 
-    with write_lock:
-        dst.write(result, window=window)
+            with rasterio.open(outfile, "w", **profile) as dst:
+                windows = [window for ij, window in dst.block_windows()]
 
+                # We cannot write to the same file from multiple threads
+                # without causing race conditions. To safely read/write
+                # from multiple threads, we use a lock to protect the
+                # DatasetReader/Writer
+                read_lock = threading.Lock() if not gdal_at_least_3_11 else nullcontext()
+                write_lock = threading.Lock()
 
-def main(in1, in2, out):
+                def process(window):
+                    with read_lock:
+                        src_array_1 = src_1.read(window=window)
+                        src_array_2 = src_2.read(window=window)
 
-    with rasterio.open(in1) as src1, rasterio.open(in2) as src2:
-
-        profile = src1.profile
-        profile.update(tiled=True, blockxsize=1024, blockysize=1024)
-
-        with rasterio.open(out, "w", **profile) as dst:
-
-            windows = [w for _, w in dst.block_windows()]
-
-            read_lock = threading.Lock()
-            write_lock = threading.Lock()
-
-            with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
-                for window in windows:
-                    executor.submit(
-                        process_window,
-                        src1, src2, dst,
-                        window,
-                        read_lock,
-                        write_lock
+                    # The computation can be performed concurrently
+                    result = np.divide(
+                        (src_array_2 - src_array_1), (src_array_2 + src_array_1),
+                        out=np.zeros_like(src_array_1, dtype=float),
+                        where=(src_array_2 + src_array_1)!=0
                     )
+
+
+                    with write_lock:
+                        dst.write(result, window=window)
+
+                # We map the process() function over the list of
+                # windows.
+                with concurrent.futures.ThreadPoolExecutor(
+                    max_workers=num_workers
+                ) as executor:
+                    executor.map(process, windows)
+
+
+if __name__ == "__main__":
+
+    filename_banda_4 = "~/T18NUJ/S2A_MSIL1C_20260109T152711_N0511_R025_T18NUJ_20260109T184450.SAFE/GRANULE/L1C_T18NUJ_A055106_20260109T152714/IMG_DATA/T18NUJ_20260109T152711_B04.jp2"
+    filename_banda_8 = "~/T18NUJ/S2A_MSIL1C_20260109T152711_N0511_R025_T18NUJ_20260109T184450.SAFE/GRANULE/L1C_T18NUJ_A055106_20260109T152714/IMG_DATA/T18NUJ_20260109T152711_B08.jp2"
+    main(
+        infile_1=filename_banda_4,
+        infile_2=filename_banda_8,
+        outfile="/home/juanse/Documents/ext_data/tmp/exportado.TIF",
+        num_workers=16)
 ```
 
 Aquí aparece un concepto importante: el procesamiento en paralelo.
