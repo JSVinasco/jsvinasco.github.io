@@ -69,7 +69,7 @@ du -sh .../B02.jp2
 ```
 
 In this case, we're talking about an image that's about 70 MB (and
-that's just one strip).
+that's just one band).
 
 The problem is that if we try to load the entire image into memory many
 times, we could easily run out of RAM.
