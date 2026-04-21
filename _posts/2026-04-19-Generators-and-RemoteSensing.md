@@ -127,8 +127,7 @@ memory.
 
 And we get a result like the one shown in the following image:
 
-![NDVI example with 1024 x 1024 pixels](../images/example_windows_read_raster_file.png)
-
+![NDVI example with 1024 x 1024 pixels](/images//example_windows_read_raster_file.png)
 
 ---
 
