@@ -125,7 +125,7 @@ disponible.
 
 Y obteniendo un resultado como el que vemos en la siguiente imagen:
 
-![NDVI example with 1024 x 1024 pixels](../images/example_windows_read_raster_file.png)
+![NDVI example with 1024 x 1024 pixels](./images/example_windows_read_raster_file.png)
 
 
 ---
